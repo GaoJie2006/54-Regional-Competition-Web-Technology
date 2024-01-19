@@ -35,11 +35,11 @@ function sel($table, $where = 1)
     return $result->fetch_assoc();
 }
 
-function sels($table, $where = 1)
+function sels($table, $where = 1, $other = "")
 {
     global $db;
     $w = ex($where);
-    $sql = "SELECT * FROM `$table` WHERE $w";
+    $sql = "SELECT * FROM `$table` WHERE $w $other";
     $result = $db->query($sql);
     $array = [];
     while ($r = $result->fetch_assoc()) {
@@ -48,7 +48,7 @@ function sels($table, $where = 1)
     return $array;
 }
 
-function ins($table,$data)
+function ins($table, $data)
 {
     global $db;
     $d = ex($data);
@@ -81,7 +81,8 @@ function dd($data)
     echo "</pre>";
     die();
 }
-function redirect($href){
+function redirect($href)
+{
     header("location: $href");
 }
 
