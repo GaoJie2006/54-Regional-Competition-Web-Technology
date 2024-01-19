@@ -1,0 +1,16 @@
+.login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    background-color: rgb(212, 212, 212);
+}
+.sec-nav-link{
+    display: block;
+    width: 100%;
+    cursor: pointer;
+    color: var(--secondary);
+}
+.sec-nav-link:hover{
+    text-decoration: none;
+    color: var(--dark);
+}
