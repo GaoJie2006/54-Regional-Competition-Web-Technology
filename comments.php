@@ -1,7 +1,12 @@
 <?php
 require_once('db.php');
-
 $comments = sels('comments', 1, "ORDER BY `id` DESC");
+if(isset($_POST['upd'])){
+    redirect("comments_edit.php?number=$_POST[number]&upd=$_POST[upd]");
+}
+if(isset($_POST['del'])){
+    redirect("comments_edit.php?number=$_POST[number]&del=$_POST[del]");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +18,7 @@ $comments = sels('comments', 1, "ORDER BY `id` DESC");
 <body>
     <?php require_once('nav.php') ?>
     <div class="container">
-        <button class="btn btn-secondary float-right" data-toggle="modal" data-target="#insert">新增留言</button>
+        <a class="btn btn-secondary float-right" href="./comments_edit.php">新增留言</a>
         <h2>訪客留言列表</h2>
         <hr>
         <?php foreach ($comments as $comment) { ?>
@@ -56,15 +61,17 @@ $comments = sels('comments', 1, "ORDER BY `id` DESC");
                         </div>
                         <form action="" method="post">
                             <div class="row">
-                                <div class="col-12 mb-2">
-                                    <input name="number" type="text" class="form-control" maxlength="4" required>
-                                </div>
-                                <div class="col-6">
-                                    <button number="upd" class="btn btn-success">編輯</button>
-                                </div>
-                                <div class="col-6">
-                                    <button name="del" class="btn btn-outline-danger">刪除</button>
-                                </div>
+                                <form action="" method="post">
+                                    <div class="col-12 mb-2">
+                                        <input name="number" type="number" class="form-control" maxlength="4">
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="upd" value="<?=$comment['id']?>" class="btn btn-success w-100">編輯</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="del" value="<?=$comment['id']?>" class="btn btn-outline-danger w-100">刪除</button>
+                                    </div>
+                                </form>
                             </div>
                         </form>
                     <?php } else { ?>
@@ -73,54 +80,6 @@ $comments = sels('comments', 1, "ORDER BY `id` DESC");
                 </div>
             </div>
         <?php } ?>
-    </div>
-    <div id="insert" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">訪客留言 - 新增</h5>
-                    <button class="btn btn-secondary" data-dismiss="modal">回留言列表</button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <div class="form-group row">
-                            <label for="" class="col-4">姓名</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-4">Email</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-4">電話</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-4">內容</label>
-                            <div class="col-8">
-                                <textarea name="" class="form-control" cols="30" rows="5"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="" class="col-4">留言序號</label>
-                            <div class="col-8">
-                                <input type="text" class="form-control">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-secondary">重設</button>
-                    <button type="submit" name="insert" class="btn btn-primary">送出</button>
-                </div>
-            </div>
-        </div>
     </div>
 </body>
 
