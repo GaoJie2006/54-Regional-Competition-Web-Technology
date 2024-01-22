@@ -81,12 +81,13 @@ function dd($data)
     echo "</pre>";
     die();
 }
-function redirect($href)
+function redirect($href = '')
 {
-    header("location: $href");
+    echo "<script>location.href='$href'</script>";
 }
 
 function alert($mess, $href)
 {
     echo "<script>alert('$mess');location.href='$href'</script>";
+    die();
 }
