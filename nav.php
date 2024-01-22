@@ -13,13 +13,13 @@
                         <a class="nav-link" href="./comments.php">訪客留言</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./visitors.php">訪客訂房</a>
+                        <a class="nav-link" href="./booking.php">訪客訂房</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./booking.php">訪客訂餐</a>
+                        <a class="nav-link" href="./menu.php">訪客訂餐</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="./menu.php">交通資訊</a>
+                        <a class="nav-link" href="./transportation.php">交通資訊</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./login.php">網站管理</a>
