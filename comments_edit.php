@@ -8,11 +8,19 @@ if(isset($_GET['upd']) || isset($_GET['del'])){
     }
 }
 if(isset($_GET['del'])){
-    del('comments',['id'=>$_GET['del']]);
+    upd('comments',['delete_time'=>date("Y-m-d H:i:s")],['id'=>$_GET['del']]);
     redirect('comments.php');
 }
 // 處理資料
 if(isset($_POST['submit'])){
+    if(!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+        echo "<script>alert('Email格式錯誤');history.go(-1);</script>";
+        die();
+    }
+    if (!preg_match("/^[0-9-]+$/", $_POST['phone'])) {
+        echo "<script>alert('電話格式錯誤');history.go(-1);</script>";
+        die();
+    }
     $display = 0;
     if(isset($_POST['display-email'])){
         unset($_POST['display-email']);
@@ -27,6 +35,7 @@ if(isset($_POST['submit'])){
 }
 // 編輯
 if(isset($_GET['upd']) && isset($_POST['submit'])){
+    $_POST['update_time'] = date("Y-m-d H:i:s");
     unset($_POST['submit']);
     upd('comments',$_POST,['id'=>$_GET['upd']]);
     redirect('comments.php');
