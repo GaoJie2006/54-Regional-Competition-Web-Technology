@@ -2,6 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+// date_default_timezone_set('Asia/Taipei');
 $db = mysqli_connect("127.0.0.1", "admin", "1234", "web54");
 
 if (!$db) {
