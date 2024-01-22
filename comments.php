@@ -1,12 +1,6 @@
 <?php
 require_once('db.php');
 $comments = sels('comments', 1, "ORDER BY `id` DESC");
-if(isset($_POST['upd'])){
-    redirect("comments_edit.php?number=$_POST[number]&upd=$_POST[upd]");
-}
-if(isset($_POST['del'])){
-    redirect("comments_edit.php?number=$_POST[number]&del=$_POST[del]");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,19 +54,17 @@ if(isset($_POST['del'])){
                             <div>
                                 <h5 class="text-center m-1">留言序號</h5>
                             </div>
-                            <form action="" method="post">
+                            <form action="./comments_edit.php" method="get">
                                 <div class="row">
-                                    <form action="" method="post">
-                                        <div class="col-12 mb-2">
-                                            <input name="number" type="number" class="form-control" maxlength="4">
-                                        </div>
-                                        <div class="col-6">
-                                            <button name="upd" value="<?=$comment['id']?>" class="btn btn-success w-100">編輯</button>
-                                        </div>
-                                        <div class="col-6">
-                                            <button name="del" value="<?=$comment['id']?>" class="btn btn-outline-danger w-100" onclick="return confirm('是否刪除留言?')">刪除</button>
-                                        </div>
-                                    </form>
+                                    <div class="col-12 mb-2">
+                                        <input name="number" type="number" class="form-control" maxlength="4">
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="upd" value="<?= $comment['id'] ?>" class="btn btn-success w-100">編輯</button>
+                                    </div>
+                                    <div class="col-6">
+                                        <button name="del" value="<?= $comment['id'] ?>" class="btn btn-outline-danger w-100" onclick="return confirm('是否刪除留言?')">刪除</button>
+                                    </div>
                                 </div>
                             </form>
                         <?php } else { ?>
