@@ -33,7 +33,7 @@
             <div class="container py-2">
                 <div class="row text-center">
                     <div class="col">
-                        <a class="sec-nav-link" href="">留言管理</a>
+                        <a class="sec-nav-link" href="./comments_admin.php">留言管理</a>
                     </div>
                     <div class="col">
                         <a class="sec-nav-link" href="">訂房管理</a>

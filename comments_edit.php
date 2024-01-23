@@ -1,15 +1,22 @@
 <?php
 require_once('db.php');
 // 判斷留言序號是否正確
-if(isset($_GET['upd']) || isset($_GET['del'])){
-    $comment = sel('comments',['id'=>($_GET['upd'] ?? $_GET['del']),'number'=>$_GET['number']]);
-    if(empty($comment)){
-        alert('留言序號錯誤','comments.php');
-    }
+if(!($_GET['upd'] ?? $_GET['del'] ?? $_GET['top'] ?? false)){
+    backPage();
 }
+$comment = sel('comments',['id'=>($_GET['upd'] ?? $_GET['del'] ?? $_GET['top']),'number'=>$_GET['number']]);
+if(empty($comment)){
+    alert('留言序號錯誤','comments.php');
+}
+// 置頂
+if(isset($_GET['top'])){
+    upd('comments',['top'=>!$comment['top']],['id'=>$_GET['top']]);
+    backPage();
+}
+// 刪除
 if(isset($_GET['del'])){
     upd('comments',['delete_time'=>date("Y-m-d H:i:s")],['id'=>$_GET['del']]);
-    redirect('comments.php');
+    backPage();
 }
 // 處理資料
 if(isset($_POST['submit'])){
@@ -38,7 +45,7 @@ if(isset($_GET['upd']) && isset($_POST['submit'])){
     $_POST['update_time'] = date("Y-m-d H:i:s");
     unset($_POST['submit']);
     upd('comments',$_POST,['id'=>$_GET['upd']]);
-    redirect('comments.php');
+    backPage(-2);
 }
 // 新增
 if (isset($_POST['submit'])) {
