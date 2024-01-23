@@ -21,7 +21,7 @@ $comments = sels('comments', 1, "ORDER BY `top` DESC, `id` DESC");
                     <div class="col-10">
                         <h5><?= $comment['visitor'] ?></h5>
                         <article class="mb-2" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
-                        <h6 class="m-0">
+                        <p class="m-0">
                             <?php
                             $message = [];
                             $message[] = "發表於 " . $comment['post_time'];
@@ -33,9 +33,9 @@ $comments = sels('comments', 1, "ORDER BY `top` DESC, `id` DESC");
                             }
                             echo join(' , ', $message);
                             ?>
-                        </h6>
+                        </p>
                         <?php if (!$comment['delete_time']) { ?>
-                            <h6>
+                            <p class="m-0">
                                 <?php if ($comment['display'] % 2 > 0) { ?>
                                     <span>
                                         Email: <?= $comment['email'] ?>
@@ -46,7 +46,7 @@ $comments = sels('comments', 1, "ORDER BY `top` DESC, `id` DESC");
                                         Phone: <?= $comment['phone'] ?>
                                     </span>
                                 <?php } ?>
-                            </h6>
+                            </p>
                         <?php } ?>
                     </div>
                     <div class="col-2">

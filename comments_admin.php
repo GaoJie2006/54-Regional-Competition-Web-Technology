@@ -26,7 +26,7 @@ if(isset($_POST['reply'])){
                         <div class="col-8">
                             <h5><?= $comment['visitor'] ?></h5>
                             <article class="mb-2" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
-                            <h6 class="m-0">
+                            <p class="m-0">
                                 <?php
                                 $message = [];
                                 $message[] = "發表於 " . $comment['post_time'];
@@ -38,9 +38,9 @@ if(isset($_POST['reply'])){
                                 }
                                 echo join(' , ', $message);
                                 ?>
-                            </h6>
+                            </p>
                             <?php if (!$comment['delete_time']) { ?>
-                                <h6>
+                                <p class="m-0">
                                     <?php if ($comment['display'] % 2 > 0) { ?>
                                         <span>
                                             Email: <?= $comment['email'] ?>
@@ -51,7 +51,7 @@ if(isset($_POST['reply'])){
                                             Phone: <?= $comment['phone'] ?>
                                         </span>
                                     <?php } ?>
-                                </h6>
+                                </p>
                             <?php } ?>
                         </div>
                         <div class="col-4">

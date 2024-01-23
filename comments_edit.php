@@ -1,12 +1,12 @@
 <?php
 require_once('db.php');
+$comment = null;
 // 判斷留言序號是否正確
-if(!($_GET['upd'] ?? $_GET['del'] ?? $_GET['top'] ?? false)){
-    backPage();
-}
-$comment = sel('comments',['id'=>($_GET['upd'] ?? $_GET['del'] ?? $_GET['top']),'number'=>$_GET['number']]);
-if(empty($comment)){
-    alert('留言序號錯誤','comments.php');
+if($_GET['upd'] ?? $_GET['del'] ?? $_GET['top'] ?? false){
+    $comment = sel('comments',['id'=>($_GET['upd'] ?? $_GET['del'] ?? $_GET['top']),'number'=>$_GET['number']]);
+    if(empty($comment)){
+        alert('留言序號錯誤','comments.php');
+    }
 }
 // 置頂
 if(isset($_GET['top'])){
