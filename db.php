@@ -82,9 +82,14 @@ function dd($data)
     echo "</pre>";
     die();
 }
+function backPage($count = -1){
+    echo "<script>history.go($count)</script>";
+    die();
+}
 function redirect($href = '')
 {
     echo "<script>location.href='$href'</script>";
+    die();
 }
 
 function alert($mess, $href)
