@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2024-01-22 15:17:26
+-- 產生時間： 2024-01-23 15:16:50
 -- 伺服器版本： 10.4.28-MariaDB
 -- PHP 版本： 8.2.4
 
@@ -37,10 +37,19 @@ CREATE TABLE `comments` (
   `phone` varchar(255) NOT NULL,
   `display` int(11) NOT NULL COMMENT '0=none,1=Email,2=Phone,3=all',
   `top` tinyint(1) NOT NULL DEFAULT 0,
+  `reply` text NOT NULL,
   `post_time` datetime NOT NULL DEFAULT current_timestamp(),
   `update_time` datetime DEFAULT NULL,
   `delete_time` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- 傾印資料表的資料 `comments`
+--
+
+INSERT INTO `comments` (`id`, `number`, `user_id`, `visitor`, `content`, `email`, `phone`, `display`, `top`, `reply`, `post_time`, `update_time`, `delete_time`) VALUES
+(1, '1111', 1, 'sda', 'asdsada', 'sada@a.a', '123', 3, 1, '', '2024-01-22 15:20:29', '2024-01-23 11:34:54', NULL),
+(2, '1111', 0, 'test', '123123', 'sada@asdasd.sad', '12341', 3, 0, 'asdasd', '2024-01-22 15:20:29', '2024-01-23 11:34:54', NULL);
 
 -- --------------------------------------------------------
 
@@ -88,7 +97,7 @@ ALTER TABLE `users`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `users`
