@@ -1,6 +1,6 @@
 <?php
 require_once('db.php');
-$comments = sels('comments', 1, "ORDER BY `id` DESC");
+$comments = sels('comments', 1, "ORDER BY `top` DESC, `id` DESC");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,11 +16,11 @@ $comments = sels('comments', 1, "ORDER BY `id` DESC");
         <h2>訪客留言列表</h2>
         <hr>
         <?php foreach ($comments as $comment) { ?>
-            <div class="border rounded my-2">
+            <div class="border rounded mt-4 mb-2 shadow">
                 <div class="row m-2">
                     <div class="col-10">
                         <h5><?= $comment['visitor'] ?></h5>
-                        <article class="mb-1" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
+                        <article class="mb-2" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
                         <h6 class="m-0">
                             <?php
                             $message = [];
@@ -71,6 +71,11 @@ $comments = sels('comments', 1, "ORDER BY `id` DESC");
                             <div class="h-100 d-flex justify-content-center align-items-center">已刪除</div>
                         <?php } ?>
                     </div>
+                    <?php if (trim($comment['reply']) != '') { ?>
+                        <div class="col-12">
+                            管理員留言：<?= $comment['reply'] ?>
+                        </div>
+                    <?php } ?>
                 </div>
             </div>
         <?php } ?>
