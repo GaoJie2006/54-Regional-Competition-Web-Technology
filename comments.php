@@ -21,6 +21,11 @@ $comments = sels('comments', 1, "ORDER BY `top` DESC, `id` DESC");
                     <div class="col-10">
                         <h5><?= $comment['visitor'] ?></h5>
                         <article class="mb-2" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
+                        <?php
+                        if ($comment['img']) {
+                            echo '<img class="comment_img" src="' . $comment['img'] . '" />';
+                        }
+                        ?>
                         <p class="m-0">
                             <?php
                             $message = [];

@@ -2,8 +2,8 @@
 require_once('db.php');
 $comments = sels('comments', 1, "ORDER BY `top` DESC,`id` DESC");
 // 評論
-if(isset($_POST['reply'])){
-    upd('comments',['reply'=>$_POST['content']],['id'=>$_POST['reply']]);
+if (isset($_POST['reply'])) {
+    upd('comments', ['reply' => $_POST['content']], ['id' => $_POST['reply']]);
     redirect();
 }
 ?>
@@ -26,6 +26,11 @@ if(isset($_POST['reply'])){
                         <div class="col-8">
                             <h5><?= $comment['visitor'] ?></h5>
                             <article class="mb-2" style="white-space: pre-line;"><span><?= !($comment['delete_time']) ? $comment['content'] : '' ?></span></article>
+                            <?php
+                            if ($comment['img']) {
+                                echo '<img class="comment_img" src="' . $comment['img'] . '" />';
+                            }
+                            ?>
                             <p class="m-0">
                                 <?php
                                 $message = [];
@@ -62,7 +67,7 @@ if(isset($_POST['reply'])){
                                             <input name="number" type="number" class="form-control" maxlength="4" value="<?= $comment['number'] ?>">
                                         </div>
                                         <div class="col-4 my-1">
-                                            <button name="top" value="<?= $comment['id'] ?>" class="btn btn-outline-primary w-100"><?=$comment['top'] ? '取消置頂' : '置頂'?></button>
+                                            <button name="top" value="<?= $comment['id'] ?>" class="btn btn-outline-primary w-100"><?= $comment['top'] ? '取消置頂' : '置頂' ?></button>
                                         </div>
                                         <div class="col-4 my-1">
                                             <button name="upd" value="<?= $comment['id'] ?>" class="btn btn-outline-secondary w-100">編輯</button>
@@ -80,10 +85,10 @@ if(isset($_POST['reply'])){
                 </div>
                 <form action="" method="post" class="row">
                     <div class="col-10">
-                        <input type="text" name="content" class="form-control" placeholder="寫下你的評論" value="<?=$comment['reply']?>">
+                        <input type="text" name="content" class="form-control" placeholder="寫下你的評論" value="<?= $comment['reply'] ?>">
                     </div>
                     <div class="col-2">
-                        <button name="reply" value="<?=$comment['id']?>" class="btn btn-dark w-100">留言</button>
+                        <button name="reply" value="<?= $comment['id'] ?>" class="btn btn-dark w-100">留言</button>
                     </div>
                 </form>
             </div>
